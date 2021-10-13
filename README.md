@@ -20,5 +20,6 @@ Functionality for customer:-
 I have also created database in Mysql workbench 
 
 Please configure the project accordingly.
+
 This is a fun project. Always open to new ideas and changes
 Thankyou
