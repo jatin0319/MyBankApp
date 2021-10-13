@@ -1,0 +1,55 @@
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: localhost    Database: my_bank_app
+-- ------------------------------------------------------
+-- Server version	8.0.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `user_password`
+--
+
+DROP TABLE IF EXISTS `user_password`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_password` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `passwrd` varchar(30) NOT NULL,
+  `created_on` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `frgnkey_idx` (`user_id`),
+  CONSTRAINT `frgnkey` FOREIGN KEY (`user_id`) REFERENCES `user_details` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_password`
+--
+
+LOCK TABLES `user_password` WRITE;
+/*!40000 ALTER TABLE `user_password` DISABLE KEYS */;
+INSERT INTO `user_password` VALUES (1,100000000,'jatin@19','2021-09-17 12:35:10'),(2,100000001,'arko@22','2020-05-27 09:10:35'),(3,100000002,'utk@10','2017-01-01 00:00:00'),(4,100000003,'nrn@99','2012-12-12 01:01:01'),(5,100000004,'urv@20','2021-01-12 12:00:01'),(6,100000005,'ysr@69','2020-05-27 09:10:35'),(7,100000006,'shi@11','2021-09-27 18:34:40'),(8,100000008,'Rat@21','2021-09-28 11:40:56'),(9,100000009,'avi@1','2021-09-29 12:24:45'),(10,100000010,'sid@2','2021-09-29 18:05:56'),(11,100000011,'Abhi@22','2021-09-30 12:57:08'),(12,100000012,'rajat@05','2021-10-07 11:02:47'),(13,100000013,'sachin@07','2021-10-07 11:46:27'),(14,100000019,'vivek@02','2021-10-08 16:40:42'),(15,100000021,'anu@123','2021-10-12 13:11:28');
+/*!40000 ALTER TABLE `user_password` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-10-12 17:51:39

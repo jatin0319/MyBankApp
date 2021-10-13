@@ -1,0 +1,147 @@
+
+<!DOCTYPE html >
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Deactivate Customer</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:80px; width:70px">
+        MY BANK APP
+    </h1>
+</div><br><br>
+
+<div style="float:right">
+    Admin ID :<span id="span"></span>
+</div><br><br>
+
+<div class="header1">
+    <h2>ACTIVATE / DEACTIVATE CUSTOMER</h2>
+</div><br><br>
+
+ <div class="search-container">
+     <form >
+         Customer ID:
+         <input type="tel" placeholder="Customer ID" name="userId" id="userId1" pattern="[0-9]{9}" required>
+         <button class="search" type="submit" >Search</button>
+      </form>
+ </div><br><br><br>
+
+<div id="details" style="background-color:#ADD8E6; position: relative; left:500px; height:510px; width:500px ;display: inline-block;"><br>
+    <div style="position: relative; left:100px;height:430px; width:320px;text-align:left;">
+        <div> <b>Firstname : </b> <span id="fname" class="f8"></span> &nbsp&nbsp&nbsp&nbsp<b>Lastname : </b> <span id="lname"></span></div><br><br>
+        <div> <b >Date Of Birth : </b> <span id="dob" class="f8"></span></div><br><br>
+        <div> <b>Email : </b> <span id="email"></span></div> <br><br>
+        <div> <b>Mobile Number : </b> <span id="mobileNo"></span></div><br><br>
+        <div> <b>Address : </b> <span id="address"></span></div><br><br>
+        <div> <b>Adhaar Number : </b> <span id="adhaarNo"></span></div><br><br>
+        <div> <b>Pan Number : </b> <span id="panNo"></span></div><br><br>
+        <div> <b>Created On : </b> <span id="createdOn"></span></div><br><br>
+        <div> <b>Account Status : </b> <span id="AccountStatus"></span></div><br>
+    </div>
+</div><br><br>
+
+
+<div class="dac">
+    <form >
+        <input type="hidden" id="userId">
+        <button id="act" type="submit">Activate</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="deact" type="submit">Deactivate</button>
+
+    </form>
+</div>
+
+</body>
+
+<script>
+$(document).ready(function(){
+         const queryString=window.location.search;
+         const urlParams = new URLSearchParams(queryString);
+         const Uid = urlParams.get('id');
+         $("#span").text(Uid) ;
+
+
+         $(".search").click(function(e){
+         e.preventDefault();
+        $.ajax({
+        type: "GET",
+        url: "http://localhost:9000/search/user",
+        data: {
+            userId: $("#userId1").val(),
+        },
+        success: function(result) {
+
+        if(result.fName==null)
+        {
+         alert("Enter Correct Customer ID");
+         $("#userId").val(null);
+        }
+         else{
+         $("#fname").text(result.fName);
+         $("#lname").text(result.lName);
+         $("#dob").text(result.dob);
+         $("#address").text(result.address);
+         $("#mobileNo").text(result.mobileNo);
+         $("#email").text(result.email);
+         $("#adhaarNo").text(result.adhaarNo);
+         $("#panNo").text(result.panNo);
+         $("#createdOn").text(result.createdOn);
+         $("#AccountStatus").text(result.statusID);
+         var abc =  $("#userId1").val();
+          $("#userId").val(abc);
+         }
+        }
+        });
+});
+
+ $("#deact").click(function(e){
+    e.preventDefault();
+    if($("#userId").val())
+      {     $.ajax({
+        type: "POST",
+        url: "http://localhost:9000/deactive/user",
+        data: {
+            userId: $("#userId").val(),
+        },
+        success: function(result)
+        {
+            alert("Message: "+result.statusMsg); },
+        error: function(result){
+                  alert("Error");}
+        });
+      }
+      else
+       { alert("First search for customer"); }
+     });
+
+      $("#act").click(function(e){
+    e.preventDefault();
+    if($("#userId").val())
+      {     $.ajax({
+        type: "POST",
+        url: "http://localhost:9000/activate/user",
+        data: {
+            userId: $("#userId").val(),
+        },
+        success: function(result)
+        {
+            alert("Message: "+result.statusMsg); },
+        error: function(result){
+                  alert("Error");}
+        });
+      }
+      else
+       { alert("First search for customer"); }
+     });
+
+});
+
+
+
+</script>
+</html>

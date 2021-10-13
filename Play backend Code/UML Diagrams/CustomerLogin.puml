@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+repeat :Enter Customer id;
+repeat while (id present?) is (no)
+-> yes;
+repeat :Enter password;
+if(password correct?) then (yes)
+:Dashboard;
+stop
+else (no)
+if(password entered less than 3 times) then (true)
+else (false)
+:account banned contact admin;
+stop
+
+@enduml

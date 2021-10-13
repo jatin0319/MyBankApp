@@ -1,0 +1,96 @@
+<!DOCTYPE html >
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Transaction history</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:80px; width:70px">
+        MY BANK APP
+    </h1>
+</div><br>
+<div style="float:right">
+    Customer ID :<span id="span"></span><br>
+</div><br><br>
+
+<div class="header1">
+<h2>TRANSACTION HISTORY</h2><br>
+</div>
+
+<br><br>
+
+<table id="table">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Date & Time</th>
+        <th>Transaction Type</th>
+    </tr>
+
+    <tbody id="autoresult">
+     </tbody>
+
+</table>
+</body>
+
+<script>
+$(document).ready(function(){
+     const queryString=window.location.search;
+     const urlParams = new URLSearchParams(queryString);
+     const userId = urlParams.get('id');
+     $("#span").text(userId) ;
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:9000/transaction/history",
+        data: {
+            userId: userId
+        },
+        success:function(data) {
+        var g;
+    $.each(data, function(i, item) {
+    if(item.transId)
+    {
+    g += '<tr class="data">';
+    g += '<td style="vertical-align: middle">' + item.transId + '</td>';
+    g += '<td style="vertical-align: middle">' + item.description + '</td>';
+    g += '<td style="vertical-align: middle">' + item.amount + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.dateTime + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.transactionType + '</td>';
+    g += '</tr>'
+    }
+    else
+    { alert("No transaction details present");}
+      });
+          $("#autoresult").html(g) ;
+         },
+        error: function(result) {
+            alert("Error");
+        }
+    });
+});
+
+</script>
+</html>

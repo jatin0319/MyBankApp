@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+repeat:Account Deactivation;
+:Deactivate Customer;
+repeat:Search account by customer id;
+repeat while (ID pressent ?) is (no)
+->yes;
+repeat while (Are you sure?) is (no)
+->yes;
+:Deactivate Account;
+stop
+@enduml

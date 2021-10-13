@@ -1,0 +1,13 @@
+@startuml
+start
+:ViewList;
+fork
+:Show registered candidates list by recently added;
+stop
+fork again
+repeat :Custom Search by customer id;
+repeat while (Id Present) is (No)
+-> yes;
+:Customer Details With Balance;
+stop
+@enduml

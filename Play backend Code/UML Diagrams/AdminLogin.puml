@@ -1,0 +1,13 @@
+@startuml
+
+start
+repeat :Enter Admin id;
+repeat while (Id present?) is (no)
+-> yes;
+repeat :Enter password;
+if(Password correct?) then (yes)
+:Dashboard;
+stop
+else (no)
+
+@enduml

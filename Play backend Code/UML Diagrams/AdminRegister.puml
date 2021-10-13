@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Admin Login;
+:Customer Details;
+if (Existing user ?) then (no)
+repeat :Submit documents;
+repeat while (Verify Documents) is (not verified)
+->verified;
+:Account created;
+stop
+
+else(yes)
+if(account type ?) then (Same)
+:Account already exists;
+stop
+else (different)
+repeat :Submit documents;
+repeat while (Verify Documents) is (not verified)
+->verified;
+:Account created;
+stop
+
+@enduml

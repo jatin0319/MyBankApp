@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+:customer: as cs
+
+rectangle BankApp{
+ usecase "Login" as c1
+ usecase "Send Money" as c3
+ usecase "Transaction history" as c4
+ usecase "Account Details" as c5
+}
+cs-->c1
+cs-->c3
+cs-->c4
+cs-->c5
+@enduml

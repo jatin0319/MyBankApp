@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Existing loan or new loan;
+if () then (existing loan)
+:Print loan details ;
+stop
+else (new loan);
+repeat:Select Loan Type;
+repeat while (Eligible) is (no)
+->yes;
+:Enter Details;
+stop
+@enduml

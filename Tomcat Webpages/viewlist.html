@@ -1,0 +1,99 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>View List</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+
+<body>
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:80px; width:70px">
+        MY BANK APP
+    </h1>
+</div><br>
+<div style="float:right">
+    Admin ID :<span id="span"></span>
+</div><br><br>
+
+<div class="header1">
+    <h2>CUSTOMER LIST</h2>
+</div> <br>
+
+
+<br>
+<div>
+<table id="table">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Date of Birth</th>
+        <th>Mobile No.</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Adhaar Number</th>
+        <th>Pan Number</th>
+        <th>Created On</th>
+        <th>Balance</th>
+        <th>Account Status</th>
+    </tr>
+    </thead>
+
+    <tbody id="autoresult">
+    </tbody>
+
+</table>
+</div>
+<script>
+
+$(document).ready(function(){
+const queryString=window.location.search;
+ const urlParams = new URLSearchParams(queryString);
+ const userId = urlParams.get('userId');
+ $("#span").text(userId) ;
+$.getJSON("http://localhost:9000/customer/list",function(data){
+    var g;
+    $.each(data, function(i, item) {
+    g += '<tr class="data">';
+    g += '<td style="vertical-align: middle">' + item.userId + '</td>';
+    g += '<td style="vertical-align: middle">' + item.fName + '</td>';
+    g += '<td style="vertical-align: middle">' +item.lName + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.dob + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.mobileNo + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.email + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.address + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.adhaarNo + '</td>';
+    g += '<td style="vertical-align: middle; ">' + item.panNo + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.createdOn + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.balance + '</td>';
+    g += '<td style="vertical-align: middle;">' + item.statusId + '</td>';
+    g += '</tr>'
+});
+$("#autoresult").html(g) ;
+});
+});
+</script>
+</body>
+</html>

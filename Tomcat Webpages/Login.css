@@ -1,0 +1,53 @@
+.header{
+	align-items: center;
+	background-color: #ADD8E6;
+	text-align: center;
+}
+
+img{
+  vertical-align: middle;
+}
+
+.container {
+  align-items: center;
+  text-align: center;
+  height: 180px;
+  width: 300px;
+  background-color:  #ADD8E6;
+}
+
+.header1{
+	text-align: center;
+}
+
+.form1{
+  align-items: center;
+  height: 240px;
+  width: 400px;
+  background-color:  #ADD8E6;
+ }
+ 
+ label.f1{
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+      }
+
+.form2{
+  align-items: center;
+  height: 270px;
+  width: 400px;
+  background-color:  #ADD8E6;
+ }
+ 
+ .search-container{
+	 text-align:center;
+ }
+ 
+ .dac{text-align:center}
+ 
+ button{ color:white;
+ background-color:green;
+}
+
+

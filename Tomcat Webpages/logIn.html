@@ -1,0 +1,84 @@
+<!DOCTYPE html >
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>My Bank App</title>
+</head>
+<body>
+
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:60px; width:70px">
+        MY BANK APP
+    </h1>
+</div>
+<br><br><br>
+
+<div class="header1">
+    <h2>LOG IN</h2>
+</div>
+<br><br>
+
+<center>
+    <form id="form">
+        <div class="container">
+            <br>
+            <img src="LogIn.jpg" alt="LogIn" style="position:relative; left:-14px;bottom:1px; height:16px; width:16px">
+            <label style="position:relative; left:-10px;" for="uname"><b>User ID (9 Digits): </b></label><br>
+            <input type="tel" placeholder="Enter User ID" id="uname" name="userId" pattern="[0-9]{9}"><br><br>
+
+            <img src="Password.png" id="pas" alt="Password"
+                 style="position:relative;bottom:1px ; left:-38px;height:16px; width:16px">
+            <label style="position:relative; left:-36px;" for="psw"><b>Password: </b></label><br>
+            <input type="password" placeholder="Enter Password" name="pswrd" id="psw"><br><br>
+
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</center>
+</body>
+
+<script>
+
+$("button").click(function(e) {
+    e.preventDefault();
+       var pswd= $("#psw").val();
+       var id= $("#uname").val();
+
+    if(id && pswd){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:9000/login/check",
+        data: {
+            userId: id,
+            pswrd : pswd
+        },
+        success: function(result) {
+                      switch(result.roleId) {
+                       case "Customer":
+                          location.href="http://localhost:8080/MyBankApp/cdashboard.html?userId="+id;
+                                       break;
+                       case "Admin":
+                          location.href="http://localhost:8080/MyBankApp/adashboard.html?userId="+id;
+                              break;
+                       default:
+                          alert("Message: "+result.statusMsg);
+                       }
+            },
+        error: function(result) {
+            alert("Enter User ID properly");
+        }
+    });
+
+    }
+    else
+    alert("Enter Login Details");
+
+});
+
+
+</script>
+</html>

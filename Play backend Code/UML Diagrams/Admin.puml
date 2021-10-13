@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+:admin: as ad
+
+rectangle BankApp{
+ ad-->(Login)
+ usecase "Register" as a1
+ usecase "View list" as a2
+ ad--> (Deactivate Customer)
+}
+ad-->a1
+ad-->a2
+@enduml

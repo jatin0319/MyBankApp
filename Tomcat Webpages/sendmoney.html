@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Send Money</title>
+</head>
+
+
+<body>
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:80px; width:70px">
+        MY BANK APP
+    </h1>
+</div><br>
+<div style="float:right">
+    Customer ID :<span id="span"></span><br>
+</div><br><br>
+<div class="header1">
+    <h2>SEND MONEY</h2><br>
+</div>
+<center>
+<form >
+
+    <div class="form1"><br>
+        <h3>Receiver's Details</h3>
+
+        <label for="Acc" class="f1"><b>Account Number : </b></label>
+        <input type="tel" placeholder="Account Number" id="Acc" name="accountNumber" ><br>
+
+        <label for="code" class="f1"><b>IFSC : </b></label>
+        <input type="text" placeholder="IFSC" id="code" name="ifsc" ><br>
+
+        <label for="name" class="f1"><b>Receiver's Name : </b></label>
+        <input type="text" placeholder="Name" id="name" name="recieverName" ><br>
+
+        <label for="amo" class="f1"><b>Amount(limit 10k) : </b></label>
+        <input type="text" placeholder="Amount" id="amo" name="amount" style="width:163px" ><br><br>
+
+        <button type="submit">Send Money</button>
+    </div>
+</form>
+</center>
+</body>
+
+<script>
+$(document).ready(function(){
+ const queryString=window.location.search;
+ const urlParams = new URLSearchParams(queryString);
+ const userId = urlParams.get('userId');
+ $("#span").text(userId) ;
+
+  $("button").click(function(e){
+  e.preventDefault();
+  var acc=$("#Acc").val();
+  var if_sc=$("#code").val();
+  var name=$("#name").val();
+  var amo=$("#amo").val();
+
+   if(acc && if_sc && name && amo){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:9000/sendmoney/data",
+        data: {
+            userId: userId,
+            accountNumber: acc,
+            ifsc : if_sc,
+            recieverName: name,
+            amount: amo
+        },
+        success:function(result) {
+           alert(result.statusMsg);
+
+
+            },
+        error: function(result) {
+            alert("Error");
+        }
+    });
+    }
+     else
+      { alert("Message: Fill the details carefully");}
+  });
+});
+</script>
+</html>

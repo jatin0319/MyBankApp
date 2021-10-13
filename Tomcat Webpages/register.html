@@ -1,0 +1,120 @@
+<!DOCTYPE html >
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Register Customer</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="Logo.png" alt="App" style=" height:80px; width:70px">MY BANK APP
+    </h1>
+</div><br>
+<div style="float:right">
+    Admin ID :<span id="span"></span><br>
+</div><br><br>
+<div class="header1">
+    <h2>REGISTER CUSTOMER</h2><br>
+</div>
+
+<center>
+<form >
+
+    <div class="form2"><br>
+
+        <label class="f1" for="fname"><b>Firstname : </b></label>
+        <input type="text" placeholder="First Name" name="fName" id="fname" >
+
+        <label class="f1" for="lname"><b>Lastname : </b></label>
+        <input type="text" placeholder="Last Name" name="lName" id="lname" >
+
+        <label class="f1" for="mno"><b>Mobile No. : </b></label>
+        <input type="text" placeholder="Mobile no." name="mobileNo" id="mno"  >
+
+        <label class="f1" style="position:relative;left:-10px" for="dob"><b>Date of Birth :</b></label>
+        <input type="date" style="position:relative;left:-10px; width:150px" placeholder="D.O.B" name="dob" id="dob" >
+
+        <label class="f1" for="ema"><b>Email : </b></label>
+        <input type="email" placeholder="Email" name="email" id="ema" >
+
+        <label class="f1" for="add"><b>Address : </b></label>
+        <input type="text" placeholder="Address" name="address" id="add"  >
+
+        <label class="f1" for="pan"><b>Pan Card no. : </b></label>
+        <input type="text" placeholder="Pan no." id="pan" name="panNo">
+
+        <label class="f1" for="adr"><b>Adhaar Card no. : </b></label>
+        <input type="text" placeholder="Adhaar no." id="adr" name="adhaarNo" >
+
+        <label class="f1" for="adr"><b>Account Balance : </b></label>
+        <input type="text" placeholder="Account Balance" id="bal" name="Account Balance" >
+
+        <label class="f1" for="pas"><b>Password : </b></label>
+        <input type="password" placeholder="Password" id="pas" name="pswrd" >
+
+        <label class="f1" for="pas"><b>Confirm Password : </b></label>
+        <input type="text" placeholder="Confirm password" id="Cpas" ><br><br>
+
+        <button type="submit">Register</button>
+    </div>
+</form>
+</center>
+</body>
+
+<script>
+ $(document).ready(function(){
+     const queryString=window.location.search;
+     const urlParams = new URLSearchParams(queryString);
+     const userId = urlParams.get('userId');
+     $("#span").html(userId) ;
+
+     $("button").click(function(e){
+     e.preventDefault();
+           var fName= $("#fname").val();
+           var lName= $("#lname").val();
+           var dob = $("#dob").val();
+           var panNo= $("#pan").val();
+           var adhaarNo= $("#adr").val();
+           var address= $("#add").val();
+           var email= $("#ema").val();
+           var mobileNo= $("#mno").val();
+           var balance= $("#bal").val();
+           var pswrd= $("#pas").val();
+           var cpswrd=$("#Cpas").val();
+
+     if(fName && lName && dob && panNo && adhaarNo && address && email && mobileNo && balance && pswrd && cpswrd){
+      $.ajax({
+
+        type: "POST",
+        url: "http://localhost:9000/save/data",
+        data: {
+            fName: fName,
+            lName: lName,
+            dob : dob,
+            panNo: panNo,
+            adhaarNo: adhaarNo,
+            address: address,
+            email: email,
+            mobileNo: mobileNo,
+            balance: balance,
+            pswrd: pswrd,
+            cnfrmPswrd: cpswrd
+        },
+        success:function(result) {
+          alert(result.statusMsg);
+
+            },
+        error: function(result) {
+            alert("Error");
+        }
+           });
+     }
+    else
+    {alert("Fill Details");}
+});
+})
+</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html >
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="Login.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+     <div class="header">
+          <h1>
+              <img src="Logo.png" alt="App" style=" height:80px; width:70px">
+                   MY BANK APP
+          </h1>
+     </div><br>
+     <div style="float:right">
+         Admin ID : <span id="span"></span>
+     </div>
+     <a href="/MyBankApp/logIn.html"><button type="submit">Logout..</button></a>
+     <br><br>
+
+     <center>
+         <span> Welcome to Dashboard <b style="color:purple" id="Message"></b></span>
+     </center>
+     <br>
+
+<div class="header1">
+     <h2> DASHBOARD</h2>
+</div><br><br>
+     <center>
+         <div style="  display:inline-block;">
+         <button id="b1" style="height:130px; width: 130px;background-color:#ADD8E6; color:black;"><b>REGISTER CUSTOMER</b></button>
+         <button id="b2" style="position: relative;top:7px; height:130px;width: 130px;background-color:#ADD8E6; color:black;"><b>CUSTOMER LIST </b></button>
+         <button id="b3" style="position: relative; height:130px;width: 130px;background-color:#ADD8E6; color:black;"><b>ACT/DEACT CUSTOMER</b></button>
+         </div>
+     </center>
+</body>
+     <script>
+     $(document).ready(function(){
+     const queryString=window.location.search;
+     const urlParams = new URLSearchParams(queryString);
+     const userId = urlParams.get('userId');
+     $("#span").text(userId) ;
+     if(userId)
+     { $.ajax({
+        type: "GET",
+        url: "http://localhost:9000/account/render",
+        data: {
+            userId: userId
+            },
+        success:function(result) {
+        $("#Message").text(result.fName);
+        }
+     });
+     }
+     $("#b1").click(function(){
+       location.href="/MyBankApp/register.html?userId="+userId;
+        });
+
+     $("#b2").click(function(){
+       location.href="/MyBankApp/viewlist.html?userId="+userId;
+        });
+
+      $("#b3").click(function(){
+       location.href="/MyBankApp/deactivate.html?id="+userId;
+        });
+     });
+</script>
+</html>

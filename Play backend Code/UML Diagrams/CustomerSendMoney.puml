@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Enter Details of Receiver bank;
+if (Account present) then (no)
+:No Account Present;
+stop
+else (yes))
+:Enter amount;
+if (Amount Available?) then (yes)
+:Money Successfully Sent;
+stop
+else (no)
+:Insufficient balance;
+stop
+
+@enduml
